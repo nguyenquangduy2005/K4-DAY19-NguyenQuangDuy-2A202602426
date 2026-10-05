@@ -1,78 +1,22 @@
 # Báo cáo Day 19 — Flat RAG vs GraphRAG
 
-**Họ tên:** …  **MSSV:** …  **Ngày:** …
+**Họ tên:** Nguyễn Quang Duy  
+**MSSV:** 2A202602426  
+**Ngày:** 05/10/2026
 
 > Kỳ vọng và thang điểm: `SUBMISSION.md`. Mọi số liệu phải khớp với `ket_qua_benchmark_kg.txt`. Bản thiết kế ontology nộp riêng ở `report/ONTOLOGY.md`.
 
 ## 1. Chi phí (10 điểm)
 
-Dán 2 bảng `Indexing` và `Querying` từ `ket_qua_benchmark_kg.txt`:
+Kết quả benchmark:
 
-```
-(dán vào đây)
-```
+```text
+== Indexing (one-off)
+pipeline  calls    in_tok  out_tok       USD  seconds
+flat        176     56072        0   0.00112     40.7
+graph       196     91958     4707   0.00933    106.9
 
-| Chỉ số | Flat | Graph | Graph / Flat |
-| --- | --- | --- | --- |
-| Indexing USD | | | ×… |
-| Indexing giây | | | ×… |
-| Mỗi câu: USD | | | ×… |
-| Mỗi câu: giây | | | ×… |
-| Mỗi câu: in_tok | | | ×… |
-
-**Chi phí tăng thêm đến từ đâu?** (2–3 câu)
-> …
-
-## 2. Từng câu hỏi (10 điểm)
-
-| Câu | Loại | Flat recall / judge | Graph recall / judge | Thắng | Vì sao (1 câu) |
-| --- | --- | --- | --- | --- | --- |
-| Q1 | single-hop-law | | | | |
-| Q2 | single-hop-news | | | | |
-| Q3 | cross-kb | | | | |
-| Q4 | cross-kb | | | | |
-| Q5 | cross-kb-multi-hop | | | | |
-| Q6 | aggregation | | | | |
-
-## 3. Phân tích lỗi (20 điểm)
-
-Chọn ít nhất 2 nhóm lỗi trong E1–E6 (`LAB_GUIDE.md` Bước 8.4). Sao chép khung dưới đây cho mỗi lỗi.
-
-### Lỗi E…: <tên>
-
-- **Hiện tượng:** …
-- **Bằng chứng:** (câu trả lời trích từ file kết quả, hoặc Cypher và kết quả)
-
-```cypher
-…
-```
-
-```
-kết quả
-```
-
-- **Nguyên nhân:** …
-- **Đề xuất sửa:** …
-
-## 4. Kết luận (5 điểm)
-
-Khi nào nên dùng KG, khi nào Flat RAG là đủ? Dẫn số liệu ở mục 1–2.
-> …
-
-## 5. Tự kiểm (5 điểm)
-
-```
-$ pytest tests/ -q
-(dán output)
-
-$ python bench_kg.py --check
-(dán output)
-```
-
-Ảnh Neo4j: `report/img/kg_count.png`, `report/img/kg_cross_kb.png`, `report/img/kg_my_case.png`.
-Người đã chọn cho `kg_my_case.png`: …
-
-## Vấn đề gặp phải (không tính điểm)
-
-Lỗi chưa giải quyết được: lệnh đã chạy, toàn bộ thông báo lỗi, những gì đã thử.
-> …
+== Querying (mean per question)
+pipeline  recall  judge   in_tok  out_tok       USD  seconds
+flat        0.43   1.00      694       47   0.00013     1.27
+graph       0.69   1.50     3216       92   0.00053     2.15
